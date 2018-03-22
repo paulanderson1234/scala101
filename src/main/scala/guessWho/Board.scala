@@ -2,26 +2,26 @@ package guessWho
 
 object Board {
 
-  val targetPerson: String = "Joey"
+  val targetPerson: Person = Person.JOEY
 
-  val peopleStillStanding: Seq[String] = Seq("Joey", "Paul", "Wayne")
+  val peopleStillStanding: Seq[Person] = Seq(Person.JOEY, Person.PAUL, Person.WAYNE)
 
-  def knockDownPersonCalled(guess: String): Seq[String] = peopleStillStanding.filterNot {
+  def knockDownPersonCalled(guess: String): Seq[Person] = peopleStillStanding.filterNot {
     personInList =>
-      if (personInList == guess) true
+      if (personInList.name == guess) true
       else false
 
   }
 
-  def knockDownPersonNotCalled(guess: String): Seq[String] = peopleStillStanding.filter {
+  def knockDownPersonNotCalled(guess: String): Seq[Person] = peopleStillStanding.filter {
     personInList =>
-      if (personInList == guess) true
+      if (personInList.name == guess) true
       else false
   }
 
-  def isItCorrect(guess: String): Seq[String] = {
+  def isItCorrect(guess: String): Seq[Person] = {
 
-    if (guess != targetPerson) knockDownPersonCalled(guess)
+    if (guess != targetPerson.name) knockDownPersonCalled(guess)
     else knockDownPersonNotCalled(guess)
 
   }

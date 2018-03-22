@@ -6,13 +6,13 @@ class BoardSpec extends UnitSpec {
 
   "Board target person" when {
     "always set to Joey" in {
-      Board.targetPerson shouldBe "Joey"
+      Board.targetPerson.name shouldBe "Joey"
     }
   }
 
   "Board should have an initial state" when {
     "containing all people" in {
-      Board.peopleStillStanding shouldBe Seq("Joey", "Paul", "Wayne")
+      Board.peopleStillStanding shouldBe Seq(Person.JOEY, Person.PAUL, Person.WAYNE)
     }
   }
 
@@ -20,14 +20,14 @@ class BoardSpec extends UnitSpec {
     "to remove our guess person from sequence" in {
       val guess: String = "Joey"
 
-      Board.knockDownPersonCalled(guess) shouldBe Seq("Paul", "Wayne")
+      Board.knockDownPersonCalled(guess) shouldBe Seq(Person.PAUL, Person.WAYNE)
     }
 
     "to remove Paul from sequence" in {
 
       val guess: String = "Paul"
 
-      Board.knockDownPersonCalled(guess) shouldBe Seq("Joey", "Wayne")
+      Board.knockDownPersonCalled(guess) shouldBe Seq(Person.JOEY, Person.WAYNE)
     }
   }
 
@@ -35,21 +35,21 @@ class BoardSpec extends UnitSpec {
     "to remove all other persons from sequence except guess" in {
       val guess: String = "Joey"
 
-      Board.knockDownPersonNotCalled(guess) shouldBe Seq("Joey")
+      Board.knockDownPersonNotCalled(guess) shouldBe Seq(Person.JOEY)
     }
 
     "to remove all persons from sequence except Paul" in {
 
       val guess: String = "Paul"
 
-      Board.knockDownPersonNotCalled(guess) shouldBe Seq("Paul")
+      Board.knockDownPersonNotCalled(guess) shouldBe Seq(Person.PAUL)
     }
 
   "If guess is correct" when {
     "return name of guess" in {
       val guess: String = "Joey"
 
-      Board.isItCorrect(guess) shouldBe Seq(guess)
+      Board.isItCorrect(guess) shouldBe Seq(Person.JOEY)
     }
   }
 
@@ -57,7 +57,7 @@ class BoardSpec extends UnitSpec {
      "return name of all persons except guess" in {
        val guess: String = "Paul"
 
-       Board.isItCorrect(guess) shouldBe Seq("Joey", "Wayne")
+       Board.isItCorrect(guess) shouldBe Seq(Person.JOEY, Person.WAYNE)
      }
    }
 
